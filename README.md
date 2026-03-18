@@ -16,6 +16,7 @@
   - `raw`: 原始数据
     - `psychopy`: 实验程序数据
     - `questionnaire`: 问卷数据（主文件）
+  - `temp`: 临时文件，一般存储外部评分网站（如CAP）使用时所用的输入文件
   - `to_review`: 审核数据
 - `preprocess`: 预处理代码
 - `review`: 审核代码
