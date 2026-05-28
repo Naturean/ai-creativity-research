@@ -4,7 +4,11 @@ from scipy.spatial.distance import pdist
 from textprocess.textcut import *
 from semdistance.get_vector import *
 
-def _unitvec(v): return v/ np.linalg.norm(v)
+def _unitvec(v): 
+    norm = np.linalg.norm(v)
+    if norm == 0:
+        return v
+    return v / norm
 
 # distance calculation between words
 def dis_words(word1, word2, model=0,size=300):
@@ -74,7 +78,14 @@ def dis_sentences(s1, s2, model=0, preprocess=0, debug=False):
     v2 = get_sentence_vector(s2,model,preprocess)
 
     if v1 is None or v2 is None:
-        return 1.0
+        return np.nan
+        
+    v1_norm = np.linalg.norm(v1)
+    v2_norm = np.linalg.norm(v2)
+    
+    # 如果其中任何一个句子向量是全零向量（比如该句子里没有词在词表里），则无法计算余弦相似度，距离设置为 np.nan
+    if v1_norm == 0 or v2_norm == 0:
+        return np.nan
     
     if debug:
         print("v1 shape:", v1.shape)
