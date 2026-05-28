@@ -1,6 +1,9 @@
 # 数据文件
+**/data/
+**/output/
 *.csv
 *.pkl
+modules/dat/words.txt
 
 # 缓存文件
 **/__pycache__/
@@ -10,3 +13,8 @@
 *.bin
 *.model
 *.bz2
+
+# 项目配置
+/.claude/
+/.github/
+/.vscode/
