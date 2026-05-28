@@ -20,24 +20,26 @@ def get_model(model_path):
         model = gensim.models.KeyedVectors.load_word2vec_format(os.path.join(model_path), binary=False)
     return model
 
-# word vector model
-model_test = get_model(model_test_path)
+# 模型，这里加载model_trained就行
+# model_test = get_model(model_test_path)
 model_trained = get_model(model_trained_path)
-model_english = get_model(model_english_path)
+# model_english = get_model(model_english_path)
 
 # get word vector
 # have_model:1 中文语料库
 # have_model:2 英文语料库
 def get_word_vector(word,have_model):
-    if have_model == 0:
-        model = model_test
-    elif have_model == 1:
-        model = model_trained
-    elif have_model == 2:
-        model = model_english
-            
+    # 这里直接用训练好的模型
+    model = model_trained
+    # if have_model == 0:
+    #     model = model_test
+    # elif have_model == 1:
+    #     model = model_trained
+    # elif have_model == 2:
+    #     model = model_english
+
     try:
-        print(model[word].shape)
+        # print(model[word].shape)
         return model[word]
     except:
         if have_model == 1:
