@@ -60,6 +60,7 @@ No build steps, test suites, or package configs — this is a research codebase,
 
 Run in this sequence; each stage depends on previous outputs. All notebooks must be run from their own directory (internal paths use `../../data/...`).
 
+0. **Generate words.txt** — `python modules/dat/get_words.py` — extracts DAT word dictionary from raw questionnaire CSV. Must run before preprocess because `dat.py` loads `words.txt` at import time.
 1. **Preprocess** — `preprocess/data_preprocess.ipynb`
 2. **Load data** — `analysis/processing/01_load_data.ipynb`
 3. **Compute metrics**:

@@ -5,7 +5,7 @@ Modified version of [Divergent Association Task](https://github.com/jayolson/div
 ## How to run
 
 1. Run `pip3 install --user numpy scipy` to install dependencies.
-2. Run `get_words.py` first to collect all words from the original dataset.
+2. Run `python get_words.py` first to extract the DAT word dictionary from the raw questionnaire CSV. The script auto-detects the first CSV in `data/raw/questionnaire/` and writes `words.txt`.
 3. Use `scoring.py` to compute scores for new responses. Example usage:
 
    ```python

@@ -46,15 +46,24 @@ conda activate graduation-design
 
 1. **准备原始数据**。登录见数（Credamo）平台，点击左上角“下载数据”，选择“文本”变量类型、CSV格式，下载问卷数据后放入 `data/raw/questionnaire/` 目录。
 2. **配置语义模型路径**。编辑 `modules/semantic_toolbox/corpustrain/model_path.py`，将其中的路径指向本机的 FastText 中文词向量文件（`.bin` 格式）。官方下载指南：[Word vectors for 157 languages - fastText](https://fasttext.cc/docs/en/crawl-vectors.html)。
-3. **确认 conda 环境名为 `graduation-design`**。VS Code 的 `.vscode/settings.json` 已绑定此环境名。
+3. **生成词表**。运行 `python modules/dat/get_words.py`，从原始问卷数据中提取 DAT 词典（`words.txt`），供后续评分使用。
+4. **确认 conda 环境名为 `graduation-design`**。VS Code 的 `.vscode/settings.json` 已绑定此环境名。
 
 ## 数据分析流水线
 
 分析按以下顺序执行，每个步骤依赖前一步的输出产物。所有 notebook 需从其所在目录运行（内部使用相对路径 `../../data/...`）。
 
 ```plaintext
-原始数据 → 预处理 → 加载数据 → 计算指标 → 报告/可视化
+原始数据 → 生成词表 → 预处理 → 加载数据 → 计算指标 → 报告/可视化
 ```
+
+### 阶段〇：生成词表
+
+| 脚本                       | 功能                         | 输入                      | 输出                    |
+| -------------------------- | ---------------------------- | ------------------------- | ----------------------- |
+| `modules/dat/get_words.py` | 从原始问卷数据提取 DAT 词典  | `data/raw/questionnaire/` | `modules/dat/words.txt` |
+
+必须在预处理之前运行，因为 `dat.py` 导入时加载 `words.txt` 作为词表白名单。
 
 ### 阶段一：预处理
 
@@ -185,6 +194,7 @@ graduation/
 
 按流水线顺序执行：
 
+0. `python modules/dat/get_words.py` — 从原始问卷提取 DAT 词典
 1. `preprocess/data_preprocess.ipynb` — 从原始数据生成预处理 CSV
 2. `analysis/processing/01_load_data.ipynb` — 生成所有中间 pickle 文件
 3. `analysis/processing/02_originality_scoring.ipynb` — 评分（需网络访问 Ocsai API，耗时较长）
