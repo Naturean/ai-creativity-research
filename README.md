@@ -54,7 +54,7 @@ pip install gensim jieba fasttext-wheel nltk statsmodels umap-learn kneed
 ### 首次运行前必须做的事
 
 1. **准备原始数据**。登录见数（Credamo）平台，点击左上角“下载数据”，选择“文本”变量类型、CSV格式，下载问卷数据后放入 `data/raw/questionnaire/` 目录。
-2. **配置语义模型路径**。编辑 `modules/semantic_toolbox/corpustrain/model_path.py`，将其中的路径指向本机的 FastText 中文词向量文件（`.bin` 格式）。
+2. **配置语义模型路径**。编辑 `modules/semantic_toolbox/corpustrain/model_path.py`，将其中的路径指向本机的 FastText 中文词向量文件（`.bin` 格式）。官方下载指南：[Word vectors for 157 languages - fastText](https://fasttext.cc/docs/en/crawl-vectors.html)。
 3. **确认 conda 环境名为 `graduation-design`**。VS Code 的 `.vscode/settings.json` 已绑定此环境名。
 
 ## 数据分析流水线
