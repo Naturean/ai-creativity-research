@@ -33,23 +33,14 @@
 ### 复现环境
 
 ```bash
-# 从环境文件创建 conda 环境（推荐）
+# 从 environment.yml 创建 conda 环境
 conda env create -f environment.yml
 
 # 激活环境
 conda activate graduation-design
 ```
 
-`environment.yml` 位于仓库根目录，固定了主要依赖版本。其中 `semantic-toolbox` 是本地模块，已在 `pip` 段声明但实际从 `modules/semantic_toolbox/` 加载（无需单独安装）。`rpy2` 和 `pymer4` 已注释——仅当需要运行混合模型（LMM/GLMM）的某些功能时才需额外安装 R 4.1+。
-
-如果不用 `environment.yml`，也可手动创建：
-
-```bash
-conda create -n graduation-design python=3.12
-conda activate graduation-design
-conda install ipykernel matplotlib numpy pandas scikit-learn scipy requests tqdm seaborn joblib patsy
-pip install gensim jieba fasttext-wheel nltk statsmodels umap-learn kneed
-```
+`environment.yml` 位于仓库根目录，固定了主要依赖版本。
 
 ### 首次运行前必须做的事
 
